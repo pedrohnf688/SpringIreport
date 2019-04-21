@@ -36,10 +36,10 @@ public class PessoaController {
 
 		Map<String, Object> parametros = new HashMap<>();
 
-		parametros.put("ClienteID", id);
+		parametros.put("Id_pessoa", id);
 
 		// Pega o arquivo .jasper localizado em resources
-		InputStream jasperStream = this.getClass().getResourceAsStream("/relatorios/BdIreport.jasper");
+		InputStream jasperStream = this.getClass().getResourceAsStream("/relatorios/reportProduto.jasper");
 
 		// Cria o objeto JaperReport com o Stream do arquivo jasper
 		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
@@ -52,7 +52,7 @@ public class PessoaController {
 		// Define que o arquivo pode ser visualizado no navegador e também nome final do
 		// arquivo
 		// para fazer download do relatório troque 'inline' por 'attachment'
-		response.setHeader("Content-Disposition", "inline; filename=BdIreport.pdf");
+		response.setHeader("Content-Disposition", "inline; filename=reportProduto.pdf");
 
 		// Faz a exportação do relatório para o HttpServletResponse
 		final OutputStream outStream = response.getOutputStream();

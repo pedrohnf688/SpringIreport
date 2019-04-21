@@ -1,22 +1,36 @@
 package com.pedrohnf688.api.modelo;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Produto {
 
-	private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer idProduto;
 	private String nomeProduto;
 	private Integer quantidade;
-	private float preco;
+	private double preco;
+
+	@ManyToOne
+	@JoinColumn(name = "pessoa_id")
+	private Pessoa pessoa;
 
 	public Produto() {
 		super();
 	}
 
 	public Integer getId() {
-		return id;
+		return idProduto;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer idProduto) {
+		this.idProduto = idProduto;
 	}
 
 	public String getNomeProduto() {
@@ -35,17 +49,25 @@ public class Produto {
 		this.quantidade = quantidade;
 	}
 
-	public float getPreco() {
+	public double getPreco() {
 		return preco;
 	}
 
-	public void setPreco(float preco) {
-		this.preco = preco;
+	public void setPreco(double d) {
+		this.preco = d;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	@Override
 	public String toString() {
-		return "Produto [id=" + id + ", nomeProduto=" + nomeProduto + ", quantidade=" + quantidade + ", preco=" + preco
+		return "Produto [id=" + idProduto + ", nomeProduto=" + nomeProduto + ", quantidade=" + quantidade + ", preco=" + preco
 				+ "]";
 	}
 
