@@ -17,10 +17,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.export.JRXlsAbstractExporterParameter;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 import net.sf.jasperreports.engine.util.JRLoader;
 
 @Controller
@@ -30,8 +36,8 @@ public class PessoaController {
 	@Autowired
 	private DataSource dataSource;
 
-	@GetMapping(value = "{id}")
-	public void imprimir(@PathVariable("id") Integer id, HttpServletResponse response)
+	@GetMapping(value = "/pdf/{id}")
+	public void gerarPdf(@PathVariable("id") Integer id, HttpServletResponse response)
 			throws JRException, SQLException, IOException {
 
 		Map<String, Object> parametros = new HashMap<>();
@@ -57,6 +63,33 @@ public class PessoaController {
 		// Faz a exportação do relatório para o HttpServletResponse
 		final OutputStream outStream = response.getOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	}
+
+	@GetMapping(value = "/excel/{id}")
+	public void gerarExcel(@PathVariable("id") Integer id, HttpServletResponse response)
+			throws JRException, SQLException, IOException {
+
+		Map<String, Object> parametros = new HashMap<>();
+
+		parametros.put("Id_pessoa", id);
+
+		InputStream jasperStream = this.getClass().getResourceAsStream("/relatorios/reportProduto.jasper");
+
+		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, dataSource.getConnection());
+
+		response.setContentType("application/x-xls");
+		response.setHeader("Content-Disposition", "inline; filename=reportProduto.xls");
+
+		final OutputStream outStream = response.getOutputStream();
+
+		JRXlsExporter exportsXLS = new JRXlsExporter();
+
+		exportsXLS.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+		exportsXLS.setParameter(JRExporterParameter.OUTPUT_STREAM, outStream);
+
+		exportsXLS.exportReport();
+
 	}
 
 }
