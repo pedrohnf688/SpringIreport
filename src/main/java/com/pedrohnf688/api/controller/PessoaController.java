@@ -17,17 +17,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.engine.export.JRXlsAbstractExporterParameter;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
-import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 
 @Controller
 @RequestMapping("/relatorio")
@@ -85,8 +83,21 @@ public class PessoaController {
 
 		JRXlsExporter exportsXLS = new JRXlsExporter();
 
-		exportsXLS.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-		exportsXLS.setParameter(JRExporterParameter.OUTPUT_STREAM, outStream);
+//		exportsXLS.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+//		exportsXLS.setParameter(JRExporterParameter.OUTPUT_STREAM, outStream);
+
+		exportsXLS.setExporterInput(new SimpleExporterInput(jasperPrint));
+		exportsXLS.setExporterOutput(new SimpleOutputStreamExporterOutput(outStream));
+
+		SimpleXlsReportConfiguration configuration = new SimpleXlsReportConfiguration();
+
+		configuration.setOnePagePerSheet(true);
+		configuration.setDetectCellType(true);
+		configuration.setCollapseRowSpan(false);
+		configuration.setWhitePageBackground(false);
+		configuration.setRemoveEmptySpaceBetweenRows(false);
+
+		exportsXLS.setConfiguration(configuration);
 
 		exportsXLS.exportReport();
 

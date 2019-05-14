@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportProduto" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="33063171-5736-4d9c-b4a3-061f80f7ea98">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
@@ -133,36 +133,36 @@
 	<pageHeader>
 		<band height="70" splitType="Stretch">
 			<textField>
-				<reportElement x="37" y="0" width="105" height="18" uuid="d2099751-7852-4656-9677-ddc7341b6466"/>
+				<reportElement x="44" y="2" width="105" height="18" uuid="d2099751-7852-4656-9677-ddc7341b6466"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="0" width="38" height="19" uuid="a3731ef9-7e4a-4b21-af3d-e83c8862dd75"/>
+				<reportElement x="0" y="2" width="38" height="18" uuid="a3731ef9-7e4a-4b21-af3d-e83c8862dd75"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cliente:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="18" width="33" height="20" uuid="b296e6c6-fd3a-4773-810c-0941b88069bc"/>
+				<reportElement x="0" y="22" width="33" height="20" uuid="b296e6c6-fd3a-4773-810c-0941b88069bc"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Email:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="32" y="18" width="151" height="20" uuid="d7be635b-af76-4144-98fa-72ac85150fb3"/>
+				<reportElement x="43" y="22" width="151" height="20" uuid="d7be635b-af76-4144-98fa-72ac85150fb3"/>
 				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="37" width="31" height="20" uuid="c8a00b5c-dad2-471e-9908-6e8307861718"/>
+				<reportElement x="0" y="45" width="31" height="20" uuid="c8a00b5c-dad2-471e-9908-6e8307861718"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cpf:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="30" y="37" width="100" height="20" uuid="1f319c4b-f258-4132-a678-48b2b164eb4a"/>
+				<reportElement x="43" y="45" width="100" height="20" uuid="1f319c4b-f258-4132-a678-48b2b164eb4a"/>
 				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
 			</textField>
 		</band>
